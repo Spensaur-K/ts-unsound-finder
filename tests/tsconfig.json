@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "strict": true,
+      "alwaysStrict": true,
+      "outDir": "/dev/null"
+    },
+    "include": [
+        "assertInitialization.ts",
+        "closures.ts",
+        "explictTypeCast.ts"
+    ]
+  }
+  

@@ -1,3 +1,7 @@
+*.js
+.env
+.vscode
+
 # Logs
 logs
 *.log

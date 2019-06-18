@@ -1,0 +1,27 @@
+{
+  "name": "ts-unsound-finder",
+  "version": "1.0.0",
+  "description": "Find instances of type system bypassing inside TypeScript projects",
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/themaplelab/ts-unsound-finder.git"
+  },
+  "author": "Spencer Killen",
+  "bugs": {
+    "url": "https://github.com/themaplelab/ts-unsound-finder/issues"
+  },
+  "homepage": "https://github.com/themaplelab/ts-unsound-finder#readme",
+  "dependencies": {
+    "commander": "^2.20.0",
+    "ts-morph": "^2.3.0",
+    "typescript": "^3.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.8"
+  }
+}
