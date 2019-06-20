@@ -1,4 +1,4 @@
-# Mine TypeScript projects for unsafe type casts
+# Search TypeScript projects for unsound type casts
 
 ## Dependencies
 - Bash
