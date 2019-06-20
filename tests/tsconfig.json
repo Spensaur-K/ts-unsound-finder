@@ -8,7 +8,8 @@
     "include": [
         "assertInitialization.ts",
         "closures.ts",
-        "explictTypeCast.ts"
+        "explictTypeCast.ts",
+        "multiple.ts"
     ]
   }
   

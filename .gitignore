@@ -1,6 +1,8 @@
 *.js
 .env
 .vscode
+results
+repos
 
 # Logs
 logs
