@@ -24,7 +24,7 @@ tsc
 for name in `ls repos`; do
     echo > "results/$name.txt"
     IFS=$'\n'
-    for config in `find "$PWD/repos/$name" -name "tsconfig.json"`; do
+    for config in `find "$PWD/repos/$name" -name "tsconfig.json" -not -path "*/node_modules/*"`; do
         echo "Mining project $name $config"
         node index.js --config "$config" >> "results/$name.txt"
     done
