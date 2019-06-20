@@ -18,7 +18,7 @@ Open this file in VSCode's terminal for hyperlinked source URLs
 ## Usage
 
 ```
-Usage: index.ts [options]
+Usage: ts-node index.ts [options]
 
 Options:
   -V, --version        output the version number
