@@ -17,6 +17,7 @@ Open this file in VSCode's terminal for hyperlinked source URLs
 
 ## Usage
 
+```
 Usage: index.ts [options]
 
 Options:
@@ -25,3 +26,4 @@ Options:
   -a, --all            Output all results as opposed to only important ones
   -v, --verbose        More output while analysis is taking place
   -h, --help           output usage information
+```
