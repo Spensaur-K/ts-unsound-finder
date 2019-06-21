@@ -18,8 +18,8 @@ diff tests/baseline.all.txt "$ALL"
 echo "tesing with -ae"
 ts-node index.ts -aec tests/tsconfig.json > "$ALL_NO_CLASSES"
 diff tests/baseline.noclass.txt "$ALL_NO_CLASSES"
-echo "tesing without -a or -e"
-ts-node index.ts -c tests/tsconfig.json > "$IMPORTANT"
+echo "tesing with -e"
+ts-node index.ts -ec tests/tsconfig.json > "$IMPORTANT"
 diff tests/baseline.txt "$IMPORTANT"
 
 rm -f tests/*.temp
