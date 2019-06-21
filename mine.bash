@@ -26,7 +26,7 @@ for name in `ls repos`; do
     IFS=$'\n'
     for config in `find "$PWD/repos/$name" -name "tsconfig.json" -not -path "*/node_modules/*"`; do
         echo "Mining project $name $config"
-        node index.js --config "$config" >> "results/$name.txt"
+        node index.js -e --config "$config" >> "results/$name.txt"
     done
     unset IFS
 done

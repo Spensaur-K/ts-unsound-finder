@@ -12,6 +12,7 @@ program
   .option("-a, --all", "Output all results as opposed to only important ones")
   .option("-e, --no-classes", "Don't resolve symbols for property accesses")
   .option("-v, --verbose", "More output while analysis is taking place")
+  .option("-s, --no-strict", "Don't require projects to have strictNullChecks (or strictPropertyInitialization if -e not present)")
   .parse(process.argv);
 
 assert(program.config, "--config path is required");
@@ -22,7 +23,7 @@ interface Occurrence {
   line: number;
   repr: string;
 }
-function createOccurrence(file: string, line: number, repr: string = "<None>"): Occurrence {
+function createOccurrence(file: string, line: number, repr: string): Occurrence {
   return { file, line, repr };
 }
 interface SuspectSymbol {
@@ -73,6 +74,13 @@ verbose(`// Using the project file: ${program.config}`);
 const project = new Project({
   tsConfigFilePath: program.config,
 });
+const config = project.compilerOptions.get();
+if (program.strict) {
+  if (!config.strictNullChecks && !config.strict && (!program.classes || config.strictPropertyInitialization)) {
+    process.exit();
+  }
+}
+
 const checker = project.getTypeChecker();
 const tchecker = checker.compilerObject;
 const sources = project.getSourceFiles();
