@@ -29,6 +29,22 @@ Summary: g: number = something from /home/bullfrog/ts-unsound-finder/tests/expli
 Summary: a: number = <any>somethingMysterious from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
 - Unsound init `a: number = <any>somethingMysterious` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
 - Explcit type cast `<any>somethingMysterious` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
+Summary: bar: {
+    x: number;
+} = foo as {
+    x: number;
+} from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:17
+- Explcit type cast `foo as {
+    x: number;
+}` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:17
+Summary: b: number = <number><unknown>somethingStringy from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:20
+- Explcit type cast `<number><unknown>somethingStringy` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:20
+Summary: h: number = <number><never>somethingStringy from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:21
+- Explcit type cast `<number><never>somethingStringy` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:21
+Summary: z: number = somethingStringy as unknown as number from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:22
+- Explcit type cast `somethingStringy as unknown as number` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:22
+Summary: w: number = somethingStringy as never as number from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:23
+- Explcit type cast `somethingStringy as never as number` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:23
 Summary: x: number from /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Unsound init `x: number` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Closure mutate `x = 42` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:7

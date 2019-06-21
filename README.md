@@ -57,7 +57,7 @@ x * 2;// Does not complain that x has not been initialized
 
 2. Assignment from any/never
 Developers also have the option of bypassing initialization checks by assigning a value to a variable that is of any/never type
-This tool will mark symbols that have an initialization that contains an explict cast to an unsound type (never/any) and where the entire initialization expression is an unsound type
+This tool will mark symbols that have an initialization that contains an explict cast to an unsound type (never/any) and where the entire initialization expression is an unsound type.
 
 ```ts
 let x: number = 42 as any; // Marked
@@ -68,7 +68,19 @@ let w: number = null!; // Marked
 let not: { x: number } = { x: 45 as any }; // Not Marked
 ```
 
-3. Mutation from within a method/closure
+3. A wider type than neccessary is used
+Though still sound, a developer may address shortcomings of the control flow analysis by choosing to declare their variables with a wider type than needed.
+This is apparent when all assignments to a variable may be determined statically and use a type that is more narrow than the declared type.
+This tool will still mark property assignments even though all assignments to a property cannot be statically determined.
+This tool will also not consider that a variable will be initialized with the value `undefined` if the declaration does not have an initialization.
+
+```ts
+let x: string | number;
+x = 43;
+// A string is never assigned to x
+```
+
+4. Mutation from within a method/closure
 Symbols that are modified within a function that they were not declared inside are marked
 ```ts
 let x!: number;
@@ -81,4 +93,4 @@ function mutate() {
 ```
 
 
-For a symbol to be reported, it must have either one of #1 or #2 (or both) and it must have #3
+For a symbol to be reported, it must have either one of #1, #2, or #3 (or any combination) and it must have #4
