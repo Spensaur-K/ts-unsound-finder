@@ -1,0 +1,31 @@
+Summary: private x: HTMLAllCollection = undefined!; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:5
+- Unsound init `private x: HTMLAllCollection = undefined!;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:5
+Summary: private y: HTMLAllCollection = null!; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:6
+- Unsound init `private y: HTMLAllCollection = null!;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:6
+Summary: private z!: HTMLAllCollection; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:7
+- Unsound init `private z!: HTMLAllCollection;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:7
+Summary: x: HTMLAllCollection = undefined! from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:11
+- Unsound init `x: HTMLAllCollection = undefined!` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:11
+Summary: y: HTMLAllCollection = null! from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:12
+- Unsound init `y: HTMLAllCollection = null!` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:12
+Summary: z: HTMLAllCollection from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
+- Unsound init `z: HTMLAllCollection` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
+Summary: x from /home/bullfrog/ts-unsound-finder/tests/closures.ts:6
+- Closure mutate `x = 43` /home/bullfrog/ts-unsound-finder/tests/closures.ts:11
+Summary: y from /home/bullfrog/ts-unsound-finder/tests/closures.ts:7
+- Closure mutate `y = "hello"` /home/bullfrog/ts-unsound-finder/tests/closures.ts:15
+Summary: z from /home/bullfrog/ts-unsound-finder/tests/closures.ts:8
+- Closure mutate `z = Symbol("foo")` /home/bullfrog/ts-unsound-finder/tests/closures.ts:19
+Summary: x: number = something from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:11
+- Unsound init `x: number = something` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:11
+Summary: y: number = somethingMysterious as any from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:12
+- Unsound init `y: number = somethingMysterious as any` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:12
+- Explcit type cast `somethingMysterious as any` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:12
+Summary: g: number = something from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:14
+- Unsound init `g: number = something` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:14
+Summary: a: number = <any>somethingMysterious from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
+- Unsound init `a: number = <any>somethingMysterious` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
+- Explcit type cast `<any>somethingMysterious` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:15
+Summary: x: number from /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
+- Unsound init `x: number` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
+- Closure mutate `x = 42` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:7

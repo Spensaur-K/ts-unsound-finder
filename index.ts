@@ -105,7 +105,14 @@ function explictTypeCast(s: SourceFile) {
     if (guard.isAsExpression(node) || guard.isTypeAssertion(node)) {
       const type = tchecker.getTypeFromTypeNode(node.getNodeProperty("type").compilerNode);
       if (isUnsoundType(type)) {
-        addEvidence("explictTypeCast", node);
+        // We end up with way too many irrelevant results without this filter
+        const { right } = getAssignmentFromRightSubExpression(node);
+        if (right) {
+          const type = checker.getTypeAtLocation(right);
+          if (isUnsoundType(type)) {
+            addEvidence("explictTypeCast", node);
+          }
+        }
       }
     }
     node.forEachChild(walk);
@@ -137,7 +144,7 @@ function closureMutate(s: SourceFile) {
       if (!declrScope && !nodeScope) {
         break binexp;
       }
-      
+
       if (declrScope != nodeScope) {
         addEvidence("closureMutate", node);
       }
@@ -189,26 +196,46 @@ function getSharedSymbol(n: Node): MorphSymbol | undefined {
     return checker.getSymbolAtLocation(id);
   }
   if (guard.isExpression(n)) {
-    let id: Node | undefined;
-    const symboledNode = walk(n) || n.getFirstAncestor(walk);
-    if (symboledNode && id) {
-      const symbol = id.getSymbol();
+    const { symbol } = getAssignmentFromRightSubExpression(n);
+    if (symbol) {
       return symbol;
     }
-    function walk(node): boolean {
-      if (guard.isBinaryExpression(node)) {
-        if (node.getOperatorToken().compilerNode.kind === ts.SyntaxKind.EqualsToken) {
-          id = node.getLeft();
-          return true;
-        }
-      }
-      if (guard.isVariableDeclaration(node) || guard.isPropertyDeclaration(node)) {
-        id = node.getNodeProperty("name");
+  }
+}
+
+type Assignment = VariableDeclaration | PropertyDeclaration | BinaryExpression;
+interface AssignmentHelper {
+  symbol: MorphSymbol | undefined;
+  assignment: Assignment;
+  right: Expression;
+}
+
+function getAssignmentFromRightSubExpression(e: Expression): Partial<AssignmentHelper> {
+  const result: Partial<AssignmentHelper> = {};
+  if (!walk(e)) {
+    if (!e.getFirstAncestor(walk)) {
+      return {};
+    }
+  }
+
+  return result;
+
+  function walk(node): boolean {
+    if (guard.isBinaryExpression(node)) {
+      if (node.getOperatorToken().compilerNode.kind === ts.SyntaxKind.EqualsToken) {
+        result.assignment = node;
+        result.symbol = node.getLeft().getSymbol();
+        result.right = node.getRight();
         return true;
       }
-
-      return false;
     }
+    if (guard.isVariableDeclaration(node) || guard.isPropertyDeclaration(node)) {
+      result.symbol = node.getNodeProperty("name").getSymbol();
+      result.assignment = node;
+      result.right = node.getInitializer()!;
+      return true;
+    }
+    return false;
   }
 }
 
