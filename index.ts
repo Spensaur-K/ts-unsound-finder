@@ -10,8 +10,9 @@ program
   .version(packageFile.version)
   .option("-c, --config <path>", "Path to a project tsconfig.json file")
   .option("-a, --all", "Output all results as opposed to only important ones")
-  .option("-e, --no-classes", "Don't resolve symbols for property accesses")
   .option("-v, --verbose", "More output while analysis is taking place")
+  .option("-e, --no-classes", "Don't resolve symbols for property accesses")
+  .option("-g, --no-globals", "Exclude symbols declared in the global/module scope")
   .option("-s, --no-strict", "Don't require projects to have strictNullChecks (or strictPropertyInitialization if -e not present)")
   .parse(process.argv);
 
@@ -57,6 +58,12 @@ function addEvidence(type: Evidence, node: Node): void {
   const symbol = getSharedSymbol(node);
   if (!symbol) {
     return;
+  }
+  if (!program.globals) {
+    const scope = findScope(node);
+    if (!scope) {
+      return;
+    }
   }
   let suspect = suspects.get(symbol);
   if (!suspect) {
