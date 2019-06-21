@@ -9,7 +9,8 @@
         "assertInitialization.ts",
         "closures.ts",
         "explictTypeCast.ts",
-        "multiple.ts"
+        "multiple.ts",
+        "classes.ts"
     ]
   }
   

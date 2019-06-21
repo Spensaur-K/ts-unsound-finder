@@ -2,18 +2,23 @@
 # Run with 'accept' to update old output
 
 ALL=tests/baseline.all.txt.temp
+ALL_NO_CLASSES=tests/baseline.noclass.txt.temp
 IMPORTANT=tests/baseline.txt.temp
 
-if [[ "$1" -eq "accept" ]]; then
+if [[ "$1" == "accept" ]]; then
     echo "Old baselines will be replaced..."
     ALL=tests/baseline.all.txt
+    ALL_NO_CLASSES=tests/baseline.noclass.txt
     IMPORTANT=tests/baseline.txt
 fi
 
 echo "tesing with -a"
 ts-node index.ts -ac tests/tsconfig.json > "$ALL"
 diff tests/baseline.all.txt "$ALL"
-echo "tesing without -a"
+echo "tesing with -ae"
+ts-node index.ts -aec tests/tsconfig.json > "$ALL_NO_CLASSES"
+diff tests/baseline.noclass.txt "$ALL_NO_CLASSES"
+echo "tesing without -a or -e"
 ts-node index.ts -c tests/tsconfig.json > "$IMPORTANT"
 diff tests/baseline.txt "$IMPORTANT"
 

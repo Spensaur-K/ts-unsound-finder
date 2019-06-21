@@ -10,6 +10,7 @@ program
   .version(packageFile.version)
   .option("-c, --config <path>", "Path to a project tsconfig.json file")
   .option("-a, --all", "Output all results as opposed to only important ones")
+  .option("-e, --no-classes", "Don't resolve symbols for property accesses")
   .option("-v, --verbose", "More output while analysis is taking place")
   .parse(process.argv);
 
@@ -191,12 +192,21 @@ function isUnsoundType(t: ts.Type | Type<ts.Type>): boolean {
 }
 
 function getSharedSymbol(n: Node): MorphSymbol | undefined {
-  if (guard.isVariableDeclaration(n) || guard.isPropertyDeclaration(n)) {
-    const id = n.getNodeProperty("name");
+  const isProp = program.classes && guard.isPropertyDeclaration(n);
+  if (guard.isVariableDeclaration(n) || isProp) {
+    const id = (<VariableDeclaration | PropertyDeclaration>n).getNodeProperty("name");
     return checker.getSymbolAtLocation(id);
   }
-  if (guard.isExpression(n)) {
-    const { symbol } = getAssignmentFromRightSubExpression(n);
+  isexpr: if (guard.isExpression(n)) {
+    const { symbol, left, assignment } = getAssignmentFromRightSubExpression(n);
+    if (!program.classes) {
+      if (left && guard.isPropertyAccessExpression(left)) {
+        break isexpr;
+      }
+      if (assignment && guard.isPropertyAssignment(assignment)) {
+        break isexpr;
+      }
+    }
     if (symbol) {
       return symbol;
     }
@@ -207,6 +217,7 @@ type Assignment = VariableDeclaration | PropertyDeclaration | BinaryExpression;
 interface AssignmentHelper {
   symbol: MorphSymbol | undefined;
   assignment: Assignment;
+  left: Node;
   right: Expression;
 }
 
@@ -226,6 +237,7 @@ function getAssignmentFromRightSubExpression(e: Expression): Partial<AssignmentH
         result.assignment = node;
         result.symbol = node.getLeft().getSymbol();
         result.right = node.getRight();
+        result.left = node.getLeft();
         return true;
       }
     }
@@ -233,6 +245,7 @@ function getAssignmentFromRightSubExpression(e: Expression): Partial<AssignmentH
       result.symbol = node.getNodeProperty("name").getSymbol();
       result.assignment = node;
       result.right = node.getInitializer()!;
+      result.left = node.getNodeProperty("name");
       return true;
     }
     return false;

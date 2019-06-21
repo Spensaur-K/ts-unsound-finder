@@ -1,3 +1,6 @@
+Summary: private x!: number; from /home/bullfrog/ts-unsound-finder/tests/classes.ts:2
+- Unsound init `private x!: number;` /home/bullfrog/ts-unsound-finder/tests/classes.ts:2
+- Closure mutate `this.x = 58` /home/bullfrog/ts-unsound-finder/tests/classes.ts:4
 Summary: x: number from /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Unsound init `x: number` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Closure mutate `x = 42` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:7

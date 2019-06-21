@@ -1,18 +1,9 @@
-Summary: private x: HTMLAllCollection = undefined!; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:5
-- Unsound init `private x: HTMLAllCollection = undefined!;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:5
-Summary: private y: HTMLAllCollection = null!; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:6
-- Unsound init `private y: HTMLAllCollection = null!;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:6
-Summary: private z!: HTMLAllCollection; from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:7
-- Unsound init `private z!: HTMLAllCollection;` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:7
 Summary: x: HTMLAllCollection = undefined! from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:11
 - Unsound init `x: HTMLAllCollection = undefined!` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:11
 Summary: y: HTMLAllCollection = null! from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:12
 - Unsound init `y: HTMLAllCollection = null!` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:12
 Summary: z: HTMLAllCollection from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
 - Unsound init `z: HTMLAllCollection` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
-Summary: private x!: number; from /home/bullfrog/ts-unsound-finder/tests/classes.ts:2
-- Unsound init `private x!: number;` /home/bullfrog/ts-unsound-finder/tests/classes.ts:2
-- Closure mutate `this.x = 58` /home/bullfrog/ts-unsound-finder/tests/classes.ts:4
 Summary: x from /home/bullfrog/ts-unsound-finder/tests/closures.ts:6
 - Closure mutate `x = 43` /home/bullfrog/ts-unsound-finder/tests/closures.ts:11
 Summary: y from /home/bullfrog/ts-unsound-finder/tests/closures.ts:7
