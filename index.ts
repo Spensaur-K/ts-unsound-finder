@@ -120,14 +120,12 @@ function explictTypeCast(s: SourceFile) {
   s.forEachChild(function walk(node) {
     if (guard.isAsExpression(node) || guard.isTypeAssertion(node)) {
       const type = tchecker.getTypeFromTypeNode(node.getNodeProperty("type").compilerNode);
-      if (isUnsoundType(type)) {
-        // We end up with way too many irrelevant results without this filter
-        const { right } = getAssignmentFromRightSubExpression(node);
-        if (right) {
-          const type = checker.getTypeAtLocation(right);
-          if (isUnsoundType(type)) {
-            addEvidence("explictTypeCast", node);
-          }
+      // We end up with way too many irrelevant results without this filter
+      const { right } = getAssignmentFromRightSubExpression(node);
+      if (right) {
+        const finalType = checker.getTypeAtLocation(right).compilerType;
+        if (type === finalType) {
+          addEvidence("explictTypeCast", node);
         }
       }
     }
@@ -137,7 +135,7 @@ function explictTypeCast(s: SourceFile) {
 
 function findScope(n: Node): FunctionLikeDeclaration | undefined {
   return n.getFirstAncestor(a => {
-    if (guard.isFunctionLikeDeclaration(a)) {
+    if (guard.isFunctionLikeDeclaration(a) || guard.isClassDeclaration(a)) {
       return true;
     }
     return false;
