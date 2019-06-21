@@ -3,6 +3,7 @@
 .vscode
 results
 repos
+yarn.lock
 
 # Logs
 logs
