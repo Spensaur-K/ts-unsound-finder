@@ -10,7 +10,8 @@
         "closures.ts",
         "explictTypeCast.ts",
         "multiple.ts",
-        "classes.ts"
+        "classes.ts",
+        "widerThanNecessary.ts"
     ]
   }
   
