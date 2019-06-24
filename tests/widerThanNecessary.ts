@@ -39,6 +39,7 @@ function bar() {
 let x: number;
 let y: string;
 let z: symbol;
+let hard: number | string;
 
 const unique = Symbol();
 
@@ -49,6 +50,8 @@ y = "hello";
 z = unique;
 z = unique;
 
+hard = 4;
+hard = "hi";
 
 function g() {
     x = 5;

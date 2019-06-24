@@ -80,6 +80,8 @@ x = 43;
 // A string is never assigned to x
 ```
 
+Because of the limitations of the TypeScript compiler type checking api, this analysis only checkers for union type nodes with undefined / null in them
+
 4. Mutation from within a method/closure
 Symbols that are modified within a function that they were not declared inside are marked
 ```ts
