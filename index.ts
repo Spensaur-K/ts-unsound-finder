@@ -178,7 +178,7 @@ function widerType(s: SourceFile): void {
         break locateSymbol;
       }
       const muts = getAllMutations(s, symbol);
-      const shouldReport = !muts.some(m => isUnsoundType(m.getType()));
+      const shouldReport = !muts.some(m => isUndefined(m.getType()));
       if (!shouldReport) {
         break locateSymbol;
       }
@@ -265,7 +265,12 @@ function isUnsoundType(t: ts.Type | Type<ts.Type>): boolean {
 
 function isUnsoundUnion(t: ts.Type | tsm.Type): boolean {
   if ("compilerType" in t) t = t.compilerType;
-  return symbolWalker.walkType(t).visitedTypes.some(isUnsoundType);
+  return symbolWalker.walkType(t).visitedTypes.some(isUndefined);
+}
+
+function isUndefined(t: ts.Type | tsm.Type): boolean {
+  if ("compilerType" in t) t = t.compilerType;
+  return t.intrinsicName === "undefined";
 }
 
 interface SharedSymbol {
@@ -317,11 +322,11 @@ function getSharedSymbol(n: Node): SharedSymbol {
   return {};
 }
 
-function getAllMutations(source: tsm.SourceFile, symbol: tsm.Symbol): tsm.Node[] {
+function getAllMutations(source: tsm.SourceFile, fsymbol: tsm.Symbol): tsm.Node[] {
   const mutations: tsm.Node[] = [];
   source.forEachChild(function walk(node) {
     const { symbol, assignedValue } = getSharedSymbol(node);
-    if (symbol && assignedValue) {
+    if (symbol === fsymbol && assignedValue) {
       mutations.push(assignedValue);
     }
     node.forEachChild(walk);

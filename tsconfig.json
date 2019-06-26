@@ -2,12 +2,16 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "lib": [
+      "esnext"
+    ],
     "allowJs": true,
     "checkJs": true,
     "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "sourceMap": true
   }, 
   "include": [
     "index.ts"
