@@ -11,7 +11,8 @@
         "explictTypeCast.ts",
         "multiple.ts",
         "classes.ts",
-        "widerThanNecessary.ts"
+        "widerThanNecessary.ts",
+        "oneWider.ts"
     ]
   }
   

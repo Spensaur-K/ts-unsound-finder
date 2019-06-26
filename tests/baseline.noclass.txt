@@ -5,10 +5,13 @@ Summary: y: HTMLAllCollection = null! from /home/bullfrog/ts-unsound-finder/test
 Summary: z: HTMLAllCollection from /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
 - Unsound init `z: HTMLAllCollection` /home/bullfrog/ts-unsound-finder/tests/assertInitialization.ts:13
 Summary: x from /home/bullfrog/ts-unsound-finder/tests/closures.ts:6
+- Wider Type used than needed `x` /home/bullfrog/ts-unsound-finder/tests/closures.ts:6
 - Closure mutate `x = 43` /home/bullfrog/ts-unsound-finder/tests/closures.ts:11
 Summary: y from /home/bullfrog/ts-unsound-finder/tests/closures.ts:7
+- Wider Type used than needed `y` /home/bullfrog/ts-unsound-finder/tests/closures.ts:7
 - Closure mutate `y = "hello"` /home/bullfrog/ts-unsound-finder/tests/closures.ts:15
 Summary: z from /home/bullfrog/ts-unsound-finder/tests/closures.ts:8
+- Wider Type used than needed `z` /home/bullfrog/ts-unsound-finder/tests/closures.ts:8
 - Closure mutate `z = Symbol("foo")` /home/bullfrog/ts-unsound-finder/tests/closures.ts:19
 Summary: x: number = something from /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:11
 - Unsound init `x: number = something` /home/bullfrog/ts-unsound-finder/tests/explictTypeCast.ts:11
@@ -39,3 +42,18 @@ Summary: w: number = somethingStringy as never as number from /home/bullfrog/ts-
 Summary: x: number from /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Unsound init `x: number` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:4
 - Closure mutate `x = 42` /home/bullfrog/ts-unsound-finder/tests/multiple.ts:7
+Summary: x: object | any from /home/bullfrog/ts-unsound-finder/tests/oneWider.ts:1
+- Wider Type used than needed `x: object | any` /home/bullfrog/ts-unsound-finder/tests/oneWider.ts:1
+Summary: foo: number | undefined from /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:9
+- Closure mutate `foo = 32` /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:15
+Summary: threeDee: ThreeDee | TooDee from /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:19
+- Closure mutate `threeDee = {
+    x: -1,
+    y: 534,
+}` /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:31
+Summary: x: number from /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:39
+- Closure mutate `x = 5` /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:57
+Summary: y: string from /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:40
+- Closure mutate `y = "hello"` /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:58
+Summary: z: symbol from /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:41
+- Closure mutate `z = unique` /home/bullfrog/ts-unsound-finder/tests/widerThanNecessary.ts:59
